@@ -11,7 +11,7 @@ def init_db():
     conn.close()
 
 def scrape_tools_info():
-    url = "https://tools-info.com" # مثال
+    url = "https://ai.ealimni.info/qr/" # مثال
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     
