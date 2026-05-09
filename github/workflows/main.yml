@@ -1,0 +1,26 @@
+name: TikTok Auto-Post
+on:
+  schedule:
+    - cron: '0 */2 * * *' # كل ساعتين
+  workflow_dispatch: # للتشغيل اليدوي
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          sudo apt-get install ffmpeg
+          pip install -r requirements.txt
+          
+      - name: Run Automation
+        env:
+          TIKTOK_TOKEN: ${{ secrets.TIKTOK_TOKEN }}
+        run: python main_script.py # الملف الذي يربط السكرابر بالمنشئ بالرافع
+        
